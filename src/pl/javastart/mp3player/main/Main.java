@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
-        final String appName = "Mp3Player v0.4";
+        final String appName = "Mp3Player v0.5";
         try {
             Parent parent = (Parent) FXMLLoader.load(getClass().getResource(
                     "/pl/javastart/mp3player/view/MainPane.fxml"));

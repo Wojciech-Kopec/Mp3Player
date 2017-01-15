@@ -1,51 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+ 
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.BorderPane?>
-
-<BorderPane prefHeight="554.0" prefWidth="839.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.MainController">
-   <top>
-      <AnchorPane BorderPane.alignment="CENTER">
-         <children>
-            <MenuBar fx:id="Menu">
-              <menus>
-                <Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" text="Open Mp3 file" />
-                        <MenuItem fx:id="dirMenuItem" mnemonicParsing="false" text="Open directory" />
-                        <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                  <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
-                    <items>
-                      <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
-                    </items>
-                  </Menu>
-              </menus>
-            </MenuBar>
-         </children></AnchorPane>
-   </top>
-   <center>
-      <AnchorPane BorderPane.alignment="CENTER">
-         <children>
-            <TableView fx:id="contentTable" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
-         </children></AnchorPane>
-   </center>
-   <bottom>
-      <HBox BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="prevButton" mnemonicParsing="false" text="Button" />
-            <ToggleButton fx:id="playButton" mnemonicParsing="false" text="ToggleButton" />
-            <Button fx:id="nextButton" mnemonicParsing="false" text="Button" />
-            <Slider fx:id="volumeSlider" />
-            <Slider fx:id="songSlider" />
-         </children></HBox>
-   </bottom>
+ 
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="pl.javastart.mp3player.controller.MainController">
+    <bottom>
+        <fx:include source="ControlPane.fxml" />
+    </bottom>
+    <center>
+        <fx:include source="ContentPane.fxml" />
+    </center>
+    <top>
+        <fx:include source="MenuPane.fxml" />
+    </top>
 </BorderPane>
