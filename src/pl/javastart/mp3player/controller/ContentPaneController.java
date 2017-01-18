@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
- 
-import org.farng.mp3.MP3File;
-import org.farng.mp3.TagException;
- 
+
+
+import com.mpatric.mp3agic.InvalidDataException;
+import com.mpatric.mp3agic.Mp3File;
+import com.mpatric.mp3agic.UnsupportedTagException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -18,7 +19,7 @@ import pl.javastart.mp3player.mp3.Mp3Song;
  
 public class ContentPaneController implements Initializable {
      
-    public static final String TITLE_COLUMN = "Tytu≥";
+    public static final String TITLE_COLUMN = "Tytu≈Ç";
     public static final String AUTHOR_COLUMN = "Autor";
     public static final String ALBUM_COLUMN = "Album";
     private Mp3Collection mp3collection;
@@ -36,7 +37,7 @@ public class ContentPaneController implements Initializable {
         mp3collection = new Mp3Collection();
         contentTable.setItems(mp3collection.getSongList());
          
-        Mp3Song mp3song = createMp3SongFromPath("10. Swiecace prostokaty.mp3");
+        Mp3Song mp3song = createMp3SongFromPath("odZera.mp3");
         mp3collection.addSong(mp3song);
     }
      
@@ -44,25 +45,25 @@ public class ContentPaneController implements Initializable {
         File file = new File(filePath);
         Mp3Song result = new Mp3Song();
         try {
-            MP3File mp3File = new MP3File(file);
+            Mp3File mp3File = new Mp3File(filePath);
             result.setFilePath(file.getAbsolutePath());
-            result.setTitle(mp3File.getID3v2Tag().getSongTitle());
-            result.setAuthor(mp3File.getID3v2Tag().getLeadArtist());
-            result.setAlbum(mp3File.getID3v2Tag().getAlbumTitle());
-        } catch (IOException | TagException e) {
+            result.setTitle(mp3File.getId3v2Tag().getTitle());
+            result.setAuthor(mp3File.getId3v2Tag().getArtist());
+            result.setAlbum(mp3File.getId3v2Tag().getAlbum());
+        } catch (IOException | InvalidDataException | UnsupportedTagException e) {
             e.printStackTrace();
         }
         return result;
     }
  
     private void configureTable() {
-        TableColumn<Mp3Song, String> titleColumn = new TableColumn<Mp3Song, String>(TITLE_COLUMN);
+        TableColumn<Mp3Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
          
-        TableColumn<Mp3Song, String> authorColumn = new TableColumn<Mp3Song, String>(AUTHOR_COLUMN);
+        TableColumn<Mp3Song, String> authorColumn = new TableColumn<>(AUTHOR_COLUMN);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
          
-        TableColumn<Mp3Song, String> albumColumn = new TableColumn<Mp3Song, String>(ALBUM_COLUMN);
+        TableColumn<Mp3Song, String> albumColumn = new TableColumn<>(ALBUM_COLUMN);
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
          
         contentTable.getColumns().add(titleColumn);
